@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BOUTIQUE BY FRANKLIN</title>
     <style>
-        /* Design Orange & Noir Premium Compact - Franklin Edition */
+        /* Design Orange & Noir Premium Compact */
         :root {
             --bg-color: #121212;
             --card-bg: #1e1e1e;
@@ -13,6 +13,8 @@
             --text-main: #e0e0e0;
             --text-muted: #aaa;
             --hover-shadow: rgba(255, 102, 0, 0.4);
+            --danger-red: #ff4d4d;
+            --danger-bg: rgba(255, 77, 77, 0.1);
         }
 
         body {
@@ -52,93 +54,68 @@
         }
 
         .shop-card {
-            background-color: var(--card-bg); 
-            /* padding réduit pour la compacité */
-            padding: 20px; 
-            border-radius: 15px; 
-            border: 1px solid #333;
-            text-align: center; 
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-            cursor: pointer; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            justify-content: flex-start; /* Aligne les éléments en haut */
-            height: auto; /* Supprime toute hauteur fixe excessive */
+            background-color: var(--card-bg); padding: 20px; border-radius: 15px; border: 1px solid #333;
+            text-align: center; transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
         }
         .shop-card:hover { transform: translateY(-8px); box-shadow: 0 12px 25px var(--hover-shadow); border-color: var(--primary-orange); }
 
-        /* Conteneur de la Lettrine Compact */
         .shop-logo-container {
-            /* taille réduite de 100px à 70px */
-            width: 70px; 
-            height: 70px; 
-            margin-bottom: 15px; /* espace réduit */
-            display: flex; 
-            align-items: center; 
-            justify-content: center;
-            border-radius: 50%; 
-            background-color: #2a2a2a; 
-            border: 2px solid #333; 
-            transition: border-color 0.3s ease;
+            width: 70px; height: 70px; margin-bottom: 15px; display: flex; align-items: center; justify-content: center;
+            border-radius: 50%; background-color: #2a2a2a; border: 2px solid #333; transition: border-color 0.3s ease;
         }
         .shop-card:hover .shop-logo-container { border-color: var(--primary-orange); }
 
-        .logo-initial {
-            /* taille de police réduite de 3em à 2.2em */
-            font-size: 2.2em; 
-            font-weight: bold; 
-            color: var(--primary-orange); 
-            text-transform: uppercase;
-        }
-
-        .shop-card h3 { 
-            color: #fff; 
-            /* marges réduites */
-            margin: 5px 0 10px 0; 
-            /* taille de police réduite de 1.4em à 1.2em */
-            font-size: 1.2em; 
-            font-weight: 700; 
-        }
+        .logo-initial { font-size: 2.2em; font-weight: bold; color: var(--primary-orange); text-transform: uppercase; }
+        .shop-card h3 { color: #fff; margin: 5px 0 10px 0; font-size: 1.2em; font-weight: 700; }
 
         .category-badge {
-            display: inline-block; 
-            margin-top: 0; /* Supprime l'espace supérieur excessif */
-            /* padding réduit */
-            padding: 4px 12px; 
-            background-color: #2a2a2a; 
-            color: var(--primary-orange);
-            border: 1px solid var(--primary-orange); 
-            border-radius: 20px; 
-            /* taille de police réduite de 0.8em à 0.75em */
-            font-size: 0.75em; 
-            font-weight: bold; 
-            text-transform: uppercase; 
-            letter-spacing: 1px;
+            display: inline-block; margin-top: 0; padding: 4px 12px; background-color: #2a2a2a; color: var(--primary-orange);
+            border: 1px solid var(--primary-orange); border-radius: 20px; font-size: 0.75em; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;
         }
         .shop-card:hover .category-badge { background-color: var(--primary-orange); color: #000; }
 
-        /* Modal (inchangé pour les détails) */
+        /* Modal (Pop-up) */
         .modal {
             display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%;
             background-color: rgba(0,0,0,0.85); backdrop-filter: blur(5px);
         }
         .modal-content {
-            background-color: var(--card-bg); color: var(--text-main); margin: 8% auto; padding: 40px; border: 2px solid var(--primary-orange);
-            border-radius: 20px; width: 85%; max-width: 650px; position: relative; box-shadow: 0 15px 40px rgba(0,0,0,0.7); text-align: center;
+            background-color: var(--card-bg); color: var(--text-main); margin: 5% auto; padding: 40px; border: 2px solid var(--primary-orange);
+            border-radius: 20px; width: 85%; max-width: 600px; position: relative; box-shadow: 0 15px 40px rgba(0,0,0,0.7); text-align: center;
+            max-height: 80vh; overflow-y: auto; /* Permet de scroller si beaucoup d'options */
         }
         .close-modal { color: var(--primary-orange); position: absolute; top: 15px; right: 25px; font-size: 35px; font-weight: bold; cursor: pointer; transition: transform 0.2s ease; }
         .close-modal:hover { transform: scale(1.2); color: #fff; }
 
-        #modal-header { display: flex; flex-direction: column; align-items: center; margin-bottom: 30px; }
+        #modal-header { display: flex; flex-direction: column; align-items: center; margin-bottom: 25px; }
         #modal-body h2 { color: var(--primary-orange); margin-bottom: 5px; font-size: 2.2em; }
         
-        .modal-shop-details {
-            text-align: left; max-width: 90%; margin: 0 auto; background-color: #1a1a1a; padding: 25px; border-radius: 12px; border: 1px solid #333;
+        /* Bloc pour chaque "Option" de remboursement */
+        .option-block {
+            text-align: left; background-color: #1a1a1a; padding: 20px; border-radius: 12px; border: 1px solid #333; margin-bottom: 15px;
         }
-        .modal-detail-line { font-size: 1.1em; margin-bottom: 12px; display: flex; justify-content: space-between; border-bottom: 1px solid #2a2a2a; padding-bottom: 8px; }
+        .option-block h4 { 
+            color: #fff; margin-top: 0; margin-bottom: 15px; font-size: 1.1em; border-bottom: 1px solid #333; padding-bottom: 8px; 
+        }
+        .modal-detail-line { font-size: 1.1em; margin-bottom: 10px; display: flex; justify-content: space-between; border-bottom: 1px solid #2a2a2a; padding-bottom: 8px; }
         .modal-detail-line strong { color: #fff; }
-        .modal-detail-line span { color: var(--text-muted); }
+        .modal-detail-line span { color: var(--primary-orange); font-weight: bold; }
+        
+        /* Encadré rouge pour les précisions */
+        .precision-box {
+            background-color: var(--danger-bg);
+            border: 1px solid var(--danger-red);
+            color: var(--danger-red);
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-size: 0.9em;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
     </style>
 </head>
 <body>
@@ -149,14 +126,6 @@
 
     <div class="filters">
         <button class="active" onclick="filterShops('TOUT')">TOUT</button>
-        <button onclick="filterShops('LUXE')">LUXE</button>
-        <button onclick="filterShops('TECH')">TECH</button>
-        <button onclick="filterShops('MODE')">MODE</button>
-        <button onclick="filterShops('SPORT')">SPORT</button>
-        <button onclick="filterShops('BEAUTE')">BEAUTÉ</button>
-        <button onclick="filterShops('MAISON')">MAISON</button>
-        <button onclick="filterShops('AUTO')">AUTO</button>
-        <button onclick="filterShops('DIVERS')">DIVERS</button>
     </div>
 
     <div id="shop-container"></div>
@@ -169,19 +138,68 @@
     </div>
 
     <script>
-        // Base de données simple, sans appels externes
+        // La nouvelle structure de base de données (sans les techniques)
+        // Note : Si une boutique a plusieurs plafonds/délais, on les met sous forme d'options.
         const shops = [
-            { id: 1, name: "ZARA", category: "MODE", delay: "3 jours", account: "Non requis", return: "Possible" },
-            { id: 2, name: "Apple", category: "TECH", delay: "Immédiat", account: "Requis (historique d'achat)", return: "Possible" },
-            { id: 3, name: "Sephora", category: "BEAUTE", delay: "2 jours", account: "Non requis", return: "Possible" },
-            { id: 4, name: "Rolex", category: "LUXE", delay: "Sur commande", account: "Oui (profil VIP)", return: "Non possible" },
-            { id: 5, name: "Decathlon", category: "SPORT", delay: "1 jour", account: "Non requis", return: "Possible" },
-            { id: 6, name: "Ikea", category: "MAISON", delay: "4 jours", account: "Non requis", return: "Possible" },
-            { id: 7, name: "Boulanger", category: "TECH", delay: "2 jours", account: "Non requis", return: "Possible" },
-            { id: 8, name: "Norauto", category: "AUTO", delay: "3 jours", account: "Non requis", return: "Possible" },
-            { id: 9, name: "Fnac", category: "DIVERS", delay: "Immédiat", account: "Non requis", return: "Possible" },
-            { id: 10, name: "Louis Vuitton", category: "LUXE", delay: "Sur commande", account: "Oui (historique requis)", return: "Non possible" },
-            { id: 11, name: "Nike", category: "SPORT", delay: "2 jours", account: "Oui (compte membre)", return: "Possible" }
+            { 
+                id: 1, name: "ABERCROMBIE", category: "TOUT", 
+                options: [
+                    { max: "1 000,00 €", delay: "2 SEMAINES", precision: null },
+                    { max: "1 000,00 €", delay: "7 JOURS", precision: null }
+                ] 
+            },
+            { 
+                id: 2, name: "ABOUT YOU", category: "TOUT", 
+                options: [
+                    { max: "800,00 €", delay: "2 SEMAINES", precision: "FITD OU LIT WEIGHT" }
+                ] 
+            },
+            { 
+                id: 3, name: "ACNE STUDIO", category: "TOUT", 
+                options: [
+                    { max: "1 500,00 €", delay: "1 MOIS", precision: null }
+                ] 
+            },
+            { 
+                id: 4, name: "ADIDAS", category: "TOUT", 
+                options: [
+                    { max: "300,00 €", delay: "INSTANT", precision: "PAS DE CODE" },
+                    { max: "1 500,00 €", delay: "2 SEMAINES", precision: null }
+                ] 
+            },
+            { 
+                id: 5, name: "ALI EXPRESS", category: "TOUT", 
+                options: [
+                    { max: "2 000,00 €", delay: "2 SEMAINES", precision: null }
+                ] 
+            },
+            { 
+                id: 6, name: "ALLTRICKS", category: "TOUT", 
+                options: [
+                    { max: "1 000,00 €", delay: "20 JOURS", precision: null }
+                ] 
+            },
+            { 
+                id: 7, name: "AMAZON DE", category: "TOUT", 
+                options: [
+                    { max: "4 500,00 €", delay: "1 SEMAINE", precision: "Peuvent demander un PR (SPOOF)" }
+                ] 
+            },
+            { 
+                id: 8, name: "ASOS", category: "TOUT", 
+                options: [
+                    { max: "200,00 €", delay: "INSTANT", precision: "PRÉFÉRER UN COMPTE HISTO" },
+                    { max: "1 000,00 €", delay: "2 SEMAINES", precision: "PRÉFÉRER UN COMPTE HISTO" }
+                ] 
+            },
+            { 
+                id: 9, name: "BACK MARKET", category: "TOUT", 
+                options: [
+                    { max: "2 500,00 €", delay: "4 JOURS", precision: "VERIF CNI KYC / POSSIBLE PR SPOOF" },
+                    { max: "3 000,00 €", delay: "2 À 3 SEMAINES", precision: "POSSIBLE VERIF CNI KYC" }
+                ] 
+            }
+            // Tu peux continuer à ajouter tes boutiques en copiant ce format exact !
         ];
 
         function renderShops(shopList) {
@@ -194,7 +212,6 @@
                 card.className = 'shop-card';
                 card.onclick = () => openModal(shop.id);
                 
-                // On récupère juste la première lettre de la boutique
                 const initial = shop.name.charAt(0).toUpperCase();
 
                 card.innerHTML = `
@@ -202,7 +219,6 @@
                          <span class="logo-initial">${initial}</span>
                     </div>
                     <h3>${shop.name}</h3>
-                    <span class="category-badge">${shop.category}</span>
                 `;
                 container.appendChild(card);
             });
@@ -227,20 +243,43 @@
             const modalBody = document.getElementById("modal-body");
             const initial = shop.name.charAt(0).toUpperCase();
 
-            modalBody.innerHTML = `
+            // Construction de l'en-tête du modal
+            let htmlContent = `
                 <div id="modal-header">
                      <div class="shop-logo-container">
                          <span class="logo-initial">${initial}</span>
                     </div>
                     <h2>${shop.name}</h2>
-                    <span class="category-badge" style="margin-top: 5px;">${shop.category}</span>
-                </div>
-                <div class="modal-shop-details">
-                    <div class="modal-detail-line"><strong>Délai :</strong> <span>${shop.delay}</span></div>
-                    <div class="modal-detail-line"><strong>Compte :</strong> <span>${shop.account}</span></div>
-                    <div class="modal-detail-line"><strong>Retour :</strong> <span>${shop.return}</span></div>
                 </div>
             `;
+
+            // Boucle pour afficher chaque option de la boutique
+            shop.options.forEach((opt, index) => {
+                htmlContent += `<div class="option-block">`;
+                
+                // Si la boutique a plusieurs options, on affiche "Option 1", "Option 2", etc.
+                if (shop.options.length > 1) {
+                    htmlContent += `<h4>Option ${index + 1}</h4>`;
+                }
+
+                htmlContent += `
+                    <div class="modal-detail-line"><strong>Maximum possible :</strong> <span>${opt.max}</span></div>
+                    <div class="modal-detail-line"><strong>Délai estimé :</strong> <span>${opt.delay}</span></div>
+                `;
+
+                // S'il y a une précision, on rajoute l'encadré rouge
+                if (opt.precision && opt.precision !== "") {
+                    htmlContent += `
+                        <div class="precision-box">
+                            ⚠️ <span>${opt.precision}</span>
+                        </div>
+                    `;
+                }
+
+                htmlContent += `</div>`; // Fin du bloc d'option
+            });
+
+            modalBody.innerHTML = htmlContent;
             modal.style.display = "block";
         }
 
