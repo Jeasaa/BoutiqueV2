@@ -2,10 +2,10 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>BOUTIQUE BY FRANKLIN</title>
     <style>
-        /* Design Orange & Noir Premium Compact */
+        /* Design Orange & Noir Premium - Responsive "App-like" */
         :root {
             --bg-color: #121212;
             --card-bg: #1e1e1e;
@@ -15,6 +15,11 @@
             --hover-shadow: rgba(255, 102, 0, 0.4);
             --danger-red: #ff4d4d;
             --danger-bg: rgba(255, 77, 77, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent; /* Enlève le flash bleu au clic sur mobile */
         }
 
         body {
@@ -28,26 +33,32 @@
             min-height: 100vh;
         }
 
+        /* HEADER */
         header {
             background-color: #000;
             color: var(--primary-orange);
             padding: 25px 0;
             text-align: center;
             border-bottom: 2px solid var(--primary-orange);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
         }
-        h1 { margin: 0; font-size: 2.8em; text-transform: uppercase; letter-spacing: 2px; font-weight: 800; }
+        h1 { margin: 0; font-size: 2.5em; text-transform: uppercase; letter-spacing: 2px; font-weight: 800; }
 
-        /* Barre de recherche */
-        .search-container {
-            text-align: center;
-            margin: 30px auto 10px auto;
-            max-width: 600px;
-            width: 90%;
+        /* BARRE DE RECHERCHE STICKY */
+        .search-wrapper {
+            position: sticky;
+            top: 0;
+            background: rgba(18, 18, 18, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 50;
+            padding: 15px 20px;
+            border-bottom: 1px solid #333;
         }
         #searchInput {
             width: 100%;
-            padding: 15px 25px;
+            max-width: 600px;
+            display: block;
+            margin: 0 auto;
+            padding: 14px 25px;
             font-size: 1.1em;
             border: 2px solid #333;
             border-radius: 30px;
@@ -55,40 +66,48 @@
             color: var(--text-main);
             outline: none;
             transition: all 0.3s ease;
-            box-sizing: border-box; /* Évite que le padding dépasse */
         }
         #searchInput:focus {
             border-color: var(--primary-orange);
             box-shadow: 0 0 15px rgba(255, 102, 0, 0.3);
         }
-        #searchInput::placeholder {
-            color: #777;
-            font-style: italic;
-        }
+        #searchInput::placeholder { color: #777; font-style: italic; }
 
-        /* Filtres */
+        /* FILTRES SCROLLABLES SUR MOBILE */
+        .filters-wrapper {
+            width: 100%;
+            overflow: hidden;
+        }
         .filters {
-            display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin: 20px auto 40px auto; max-width: 90%; padding: 10px;
+            display: flex; 
+            justify-content: center; 
+            flex-wrap: wrap; 
+            gap: 12px; 
+            margin: 20px auto; 
+            max-width: 1200px; 
+            padding: 0 20px;
         }
         button {
-            padding: 12px 28px; border: 2px solid var(--primary-orange); border-radius: 30px;
+            padding: 10px 24px; border: 2px solid var(--primary-orange); border-radius: 30px;
             background-color: transparent; color: var(--primary-orange); cursor: pointer; font-weight: bold;
-            font-size: 0.95em; text-transform: uppercase; transition: all 0.3s ease;
+            font-size: 0.9em; text-transform: uppercase; transition: all 0.3s ease; white-space: nowrap;
         }
         button:hover, button.active { background-color: var(--primary-orange); color: #000; box-shadow: 0 0 15px var(--primary-orange); }
 
-        /* Grille */
+        /* GRILLE */
         #shop-container {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 30px;
-            max-width: 1200px; margin: 0 auto 50px auto; padding: 20px; flex-grow: 1;
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); 
+            gap: 25px;
+            max-width: 1200px; margin: 0 auto 50px auto; padding: 20px; width: 100%; flex-grow: 1;
         }
 
         .shop-card {
             background-color: var(--card-bg); padding: 20px; border-radius: 15px; border: 1px solid #333;
-            text-align: center; transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            text-align: center; transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
             cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
         }
-        .shop-card:hover { transform: translateY(-8px); box-shadow: 0 12px 25px var(--hover-shadow); border-color: var(--primary-orange); }
+        .shop-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px var(--hover-shadow); border-color: var(--primary-orange); }
 
         .shop-logo-container {
             width: 70px; height: 70px; margin-bottom: 15px; display: flex; align-items: center; justify-content: center;
@@ -97,41 +116,91 @@
         .shop-card:hover .shop-logo-container { border-color: var(--primary-orange); }
 
         .logo-initial { font-size: 2.2em; font-weight: bold; color: var(--primary-orange); text-transform: uppercase; }
-        .shop-card h3 { color: #fff; margin: 5px 0 10px 0; font-size: 1.2em; font-weight: 700; }
+        .shop-card h3 { color: #fff; margin: 5px 0 10px 0; font-size: 1.1em; font-weight: 700; width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
         .category-badge {
-            display: inline-block; margin-top: 0; padding: 4px 12px; background-color: #2a2a2a; color: var(--primary-orange);
-            border: 1px solid var(--primary-orange); border-radius: 20px; font-size: 0.75em; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;
+            display: inline-block; padding: 4px 12px; background-color: #2a2a2a; color: var(--primary-orange);
+            border: 1px solid var(--primary-orange); border-radius: 20px; font-size: 0.7em; font-weight: bold; letter-spacing: 1px;
         }
         .shop-card:hover .category-badge { background-color: var(--primary-orange); color: #000; }
 
-        /* Modal (Pop-up) */
+        /* MODAL (POP-UP) */
         .modal {
             display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%;
             background-color: rgba(0,0,0,0.85); backdrop-filter: blur(5px);
         }
         .modal-content {
             background-color: var(--card-bg); color: var(--text-main); margin: 5% auto; padding: 40px; border: 2px solid var(--primary-orange);
-            border-radius: 20px; width: 85%; max-width: 600px; position: relative; box-shadow: 0 15px 40px rgba(0,0,0,0.7); text-align: center;
-            max-height: 80vh; overflow-y: auto; 
+            border-radius: 20px; width: 85%; max-width: 600px; position: relative; box-shadow: 0 15px 40px rgba(0,0,0,0.9);
+            max-height: 85vh; overflow-y: auto; 
         }
-        .close-modal { color: var(--primary-orange); position: absolute; top: 15px; right: 25px; font-size: 35px; font-weight: bold; cursor: pointer; transition: transform 0.2s ease; }
-        .close-modal:hover { transform: scale(1.2); color: #fff; }
-
-        #modal-header { display: flex; flex-direction: column; align-items: center; margin-bottom: 25px; }
-        #modal-body h2 { color: var(--primary-orange); margin-bottom: 5px; font-size: 2.2em; }
+        .close-modal { color: var(--primary-orange); position: absolute; top: 15px; right: 25px; font-size: 35px; font-weight: bold; cursor: pointer; }
         
-        .option-block {
-            text-align: left; background-color: #1a1a1a; padding: 20px; border-radius: 12px; border: 1px solid #333; margin-bottom: 15px;
-        }
+        #modal-header { display: flex; flex-direction: column; align-items: center; margin-bottom: 25px; text-align: center; }
+        #modal-body h2 { color: var(--primary-orange); margin-bottom: 5px; font-size: 2em; }
+        
+        .option-block { text-align: left; background-color: #1a1a1a; padding: 20px; border-radius: 12px; border: 1px solid #333; margin-bottom: 15px; }
         .option-block h4 { color: #fff; margin-top: 0; margin-bottom: 15px; font-size: 1.1em; border-bottom: 1px solid #333; padding-bottom: 8px; }
-        .modal-detail-line { font-size: 1.1em; margin-bottom: 10px; display: flex; justify-content: space-between; border-bottom: 1px solid #2a2a2a; padding-bottom: 8px; }
+        .modal-detail-line { font-size: 1.05em; margin-bottom: 10px; display: flex; justify-content: space-between; border-bottom: 1px solid #2a2a2a; padding-bottom: 8px; }
         .modal-detail-line strong { color: #fff; }
-        .modal-detail-line span { color: var(--primary-orange); font-weight: bold; text-align: right; max-width: 60%; }
+        .modal-detail-line span { color: var(--primary-orange); font-weight: bold; text-align: right; max-width: 55%; }
         
-        .precision-box {
-            background-color: var(--danger-bg); border: 1px solid var(--danger-red); color: var(--danger-red); padding: 12px;
-            border-radius: 8px; margin-top: 15px; font-size: 0.9em; font-weight: 600; display: flex; align-items: center; gap: 10px;
+        .precision-box { background-color: var(--danger-bg); border: 1px solid var(--danger-red); color: var(--danger-red); padding: 12px; border-radius: 8px; margin-top: 15px; font-size: 0.9em; font-weight: 600; display: flex; align-items: center; gap: 10px; line-height: 1.4; }
+
+
+        /* =========================================
+           VERSION MOBILE UNIQUEMENT (Matière INSANE)
+           ========================================= */
+        @media (max-width: 768px) {
+            header { padding: 15px 0; }
+            h1 { font-size: 1.8em; }
+
+            /* Boutons de filtre en swipe horizontal (comme TikTok/Insta) */
+            .filters {
+                flex-wrap: nowrap;
+                justify-content: flex-start;
+                overflow-x: auto;
+                padding: 10px 20px 20px 20px;
+                margin: 0;
+                scroll-snap-type: x mandatory;
+                scrollbar-width: none; /* Cache la barre de scroll Firefox */
+            }
+            .filters::-webkit-scrollbar { display: none; } /* Cache la barre de scroll Chrome/Safari */
+            button { scroll-snap-align: start; }
+
+            /* Grille compacte (2 colonnes) */
+            #shop-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+                padding: 10px 20px;
+            }
+            .shop-card { padding: 15px 10px; border-radius: 12px; }
+            .shop-logo-container { width: 50px; height: 50px; margin-bottom: 10px; }
+            .logo-initial { font-size: 1.5em; }
+            .shop-card h3 { font-size: 0.95em; margin-bottom: 8px; }
+            .category-badge { font-size: 0.6em; padding: 3px 8px; }
+
+            /* Le Modal façon iOS "Bottom Sheet" */
+            .modal {
+                display: none; align-items: flex-end; /* Aligné en bas */
+            }
+            .modal-content {
+                width: 100%; margin: 0; max-width: 100%;
+                border-radius: 25px 25px 0 0; /* Arrondi seulement en haut */
+                border-left: none; border-right: none; border-bottom: none;
+                padding: 30px 20px 40px 20px;
+                animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            }
+            .close-modal { top: 10px; right: 20px; font-size: 40px; }
+            
+            @keyframes slideUp {
+                from { transform: translateY(100%); opacity: 0; }
+                to { transform: translateY(0); opacity: 1; }
+            }
+
+            .modal-detail-line { flex-direction: column; align-items: flex-start; gap: 5px; border-bottom: none; margin-bottom: 15px; }
+            .modal-detail-line span { text-align: left; max-width: 100%; font-size: 1.1em; }
+            .option-block { border-bottom: 1px solid #333; border-radius: 0; background: transparent; padding: 10px 0; }
         }
     </style>
 </head>
@@ -141,20 +210,22 @@
         <h1>BOUTIQUE BY FRANKLIN</h1>
     </header>
 
-    <div class="search-container">
-        <input type="text" id="searchInput" placeholder="Rechercher une boutique (ex: Nike, Zara, Apple...)" onkeyup="searchShops()">
+    <div class="search-wrapper">
+        <input type="text" id="searchInput" placeholder="Rechercher une boutique..." onkeyup="searchShops()">
     </div>
 
-    <div class="filters">
-        <button id="btn-tout" class="active" onclick="filterShops('TOUT')">TOUT</button>
-        <button onclick="filterShops('LUXE')">LUXE</button>
-        <button onclick="filterShops('TECH')">TECH</button>
-        <button onclick="filterShops('MODE')">MODE</button>
-        <button onclick="filterShops('SPORT')">SPORT</button>
-        <button onclick="filterShops('BEAUTE')">BEAUTÉ</button>
-        <button onclick="filterShops('MAISON')">MAISON</button>
-        <button onclick="filterShops('AUTO')">AUTO</button>
-        <button onclick="filterShops('DIVERS')">DIVERS</button>
+    <div class="filters-wrapper">
+        <div class="filters">
+            <button id="btn-tout" class="active" onclick="filterShops('TOUT')">TOUT</button>
+            <button onclick="filterShops('LUXE')">LUXE</button>
+            <button onclick="filterShops('TECH')">TECH</button>
+            <button onclick="filterShops('MODE')">MODE</button>
+            <button onclick="filterShops('SPORT')">SPORT</button>
+            <button onclick="filterShops('BEAUTE')">BEAUTÉ</button>
+            <button onclick="filterShops('MAISON')">MAISON</button>
+            <button onclick="filterShops('AUTO')">AUTO</button>
+            <button onclick="filterShops('DIVERS')">DIVERS</button>
+        </div>
     </div>
 
     <div id="shop-container"></div>
@@ -167,12 +238,13 @@
     </div>
 
     <script>
-        // Base de données épurée (uniquement alertes sur Poids, Instabilité et Playstations)
+        // Ta base de données (je l'ai condensée ici pour que le message ne soit pas trop long, MAIS colle ta liste complète ici à la place !!)
+        // IMPORTANT : J'ai mis juste les 5 premières pour l'exemple. Copie-colle ton tableau 'shops' du message précédent juste ici.
         const shops = [
             { id: 1, name: "ABERCROMBIE", category: "MODE", options: [{ max: "1 000,00 €", delay: "2 SEMAINES", precision: "" }, { max: "1 000,00 €", delay: "7 JOURS", precision: "" }] },
             { id: 2, name: "ABOUT YOU", category: "MODE", options: [{ max: "800,00 €", delay: "2 SEMAINES", precision: "WEIGHT (Attention aux gros objets)" }] },
             { id: 3, name: "ACNE STUDIO", category: "MODE", options: [{ max: "1 500,00 €", delay: "1 MOIS", precision: "" }] },
-            { id: 4, name: "ADIDAS", category: "SPORT", options: [{ max: "300,00 €", delay: "INSTANT", precision: "" }, { max: "1 500,00 €", delay: "2 SEMAINES", precision: "" }] },
+            { id: 4, name: "ADIDAS", category: "SPORT", options: [{ max: "300,00 €", delay: "INSTANT", precision: "PAS DE CODE" }, { max: "1 500,00 €", delay: "2 SEMAINES", precision: "" }] },
             { id: 5, name: "ALI EXPRESS", category: "DIVERS", options: [{ max: "2 000,00 €", delay: "2 SEMAINES", precision: "" }] },
             { id: 6, name: "ALLTRICKS", category: "SPORT", options: [{ max: "1 000,00 €", delay: "20 JOURS", precision: "" }] },
             { id: 7, name: "AMAZON BE", category: "DIVERS", options: [{ max: "1 500,00 €", delay: "2 SEMAINES", precision: "" }] },
@@ -340,7 +412,6 @@
             const container = document.getElementById('shop-container');
             container.innerHTML = ''; 
             
-            // Tri alphabétique
             shopList.sort((a, b) => a.name.localeCompare(b.name));
 
             shopList.forEach(shop => {
@@ -361,14 +432,15 @@
             });
         }
 
-        // Fonction pour filtrer par catégorie
         function filterShops(category) {
-            // Vider la barre de recherche quand on clique sur une catégorie
             document.getElementById('searchInput').value = '';
 
             document.querySelectorAll('.filters button').forEach(btn => btn.classList.remove('active'));
             if(event && event.target) {
                 event.target.classList.add('active');
+                
+                // Petit bonus : recentre le bouton scrollé sur mobile
+                event.target.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
             } else {
                 document.getElementById('btn-tout').classList.add('active');
             }
@@ -381,15 +453,12 @@
             }
         }
 
-        // Fonction pour la barre de recherche
         function searchShops() {
             const query = document.getElementById('searchInput').value.toLowerCase();
             
-            // Remettre visuellement le filtre sur "TOUT"
             document.querySelectorAll('.filters button').forEach(btn => btn.classList.remove('active'));
             document.getElementById('btn-tout').classList.add('active');
 
-            // Filtrer le tableau entier selon le texte tapé
             const filtered = shops.filter(shop => shop.name.toLowerCase().includes(query));
             renderShops(filtered);
         }
@@ -423,7 +492,6 @@
                     <div class="modal-detail-line"><strong>Délai estimé :</strong> <span>${opt.delay}</span></div>
                 `;
 
-                // N'affiche l'encadré rouge que s'il y a un vrai danger / info critique
                 if (opt.precision && opt.precision.trim() !== "") {
                     htmlContent += `
                         <div class="precision-box">
@@ -436,13 +504,32 @@
             });
 
             modalBody.innerHTML = htmlContent;
-            modal.style.display = "block";
+            
+            // Animation d'ouverture fluide sur mobile
+            modal.style.display = "flex";
         }
 
         function closeModal() { modal.style.display = "none"; }
-        window.onclick = function(event) { if (event.target == modal) { modal.style.display = "none"; } }
+        
+        // Ferme si on clique en dehors du contenu
+        window.onclick = function(event) { 
+            if (event.target == modal) { 
+                modal.style.display = "none"; 
+            } 
+        }
 
-        // Initialisation de la page
+        // Permet aussi de swiper vers le bas pour fermer le modal (effet natif)
+        let touchstartY = 0;
+        let touchendY = 0;
+
+        modal.addEventListener('touchstart', e => { touchstartY = e.changedTouches[0].screenY; });
+        modal.addEventListener('touchend', e => { 
+            touchendY = e.changedTouches[0].screenY;
+            if (touchendY > touchstartY + 50) { // Si on a glissé vers le bas de 50px
+                closeModal();
+            }
+        });
+
         renderShops(shops);
     </script>
 </body>
