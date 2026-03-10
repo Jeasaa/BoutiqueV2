@@ -26,7 +26,6 @@
             min-height: 100vh;
         }
 
-        /* En-tête */
         header {
             background-color: #000;
             color: var(--primary-orange);
@@ -35,203 +34,70 @@
             border-bottom: 2px solid var(--primary-orange);
             box-shadow: 0 4px 10px rgba(0,0,0,0.5);
         }
-        h1 {
-            margin: 0;
-            font-size: 2.8em;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 800;
-        }
+        h1 { margin: 0; font-size: 2.8em; text-transform: uppercase; letter-spacing: 2px; font-weight: 800; }
 
-        /* Barre de navigation / Filtres */
         .filters {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin: 40px auto;
-            max-width: 90%;
-            padding: 10px;
+            display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin: 40px auto; max-width: 90%; padding: 10px;
         }
         button {
-            padding: 12px 28px;
-            border: 2px solid var(--primary-orange);
-            border-radius: 30px;
-            background-color: transparent;
-            color: var(--primary-orange);
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 0.95em;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
+            padding: 12px 28px; border: 2px solid var(--primary-orange); border-radius: 30px;
+            background-color: transparent; color: var(--primary-orange); cursor: pointer; font-weight: bold;
+            font-size: 0.95em; text-transform: uppercase; transition: all 0.3s ease;
         }
-        button:hover, button.active {
-            background-color: var(--primary-orange);
-            color: #000;
-            box-shadow: 0 0 15px var(--primary-orange);
-        }
+        button:hover, button.active { background-color: var(--primary-orange); color: #000; box-shadow: 0 0 15px var(--primary-orange); }
 
-        /* Grille des boutiques */
         #shop-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto 50px auto;
-            padding: 20px;
-            flex-grow: 1;
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 30px;
+            max-width: 1200px; margin: 0 auto 50px auto; padding: 20px; flex-grow: 1;
         }
 
-        /* Carte de boutique */
         .shop-card {
-            background-color: var(--card-bg);
-            padding: 30px;
-            border-radius: 15px;
-            border: 1px solid #333;
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-            height: 100%;
+            background-color: var(--card-bg); padding: 30px; border-radius: 15px; border: 1px solid #333;
+            text-align: center; transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: space-between; height: 100%;
         }
-        .shop-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 25px var(--hover-shadow);
-            border-color: var(--primary-orange);
-        }
+        .shop-card:hover { transform: translateY(-8px); box-shadow: 0 12px 25px var(--hover-shadow); border-color: var(--primary-orange); }
 
-        /* Conteneur du Logo */
+        /* Conteneur de la Lettrine (remplace l'image qui bug) */
         .shop-logo-container {
-            width: 120px;
-            height: 120px;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            overflow: hidden;
-            background-color: #ffffff; /* Fond blanc pour faire ressortir les logos */
-            border: 2px solid #333;
-            transition: border-color 0.3s ease;
-            padding: 10px; /* Petit espace intérieur */
+            width: 100px; height: 100px; margin-bottom: 20px; display: flex; align-items: center; justify-content: center;
+            border-radius: 50%; background-color: #2a2a2a; border: 2px solid #333; transition: border-color 0.3s ease;
         }
-        .shop-card:hover .shop-logo-container {
-            border-color: var(--primary-orange);
+        .shop-card:hover .shop-logo-container { border-color: var(--primary-orange); }
+
+        .logo-initial {
+            font-size: 3em; font-weight: bold; color: var(--primary-orange); text-transform: uppercase;
         }
 
-        /* L'image du logo */
-        .shop-logo-image {
-            width: 100%;
-            height: 100%;
-            object-fit: contain; /* S'assure que le logo n'est pas coupé */
-            display: block;
-        }
-
-        .shop-card h3 {
-            color: #fff;
-            margin: 10px 0;
-            font-size: 1.4em;
-            font-weight: 700;
-        }
+        .shop-card h3 { color: #fff; margin: 10px 0; font-size: 1.4em; font-weight: 700; }
 
         .category-badge {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 6px 15px;
-            background-color: #2a2a2a;
-            color: var(--primary-orange);
-            border: 1px solid var(--primary-orange);
-            border-radius: 20px;
-            font-size: 0.8em;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            display: inline-block; margin-top: 15px; padding: 6px 15px; background-color: #2a2a2a; color: var(--primary-orange);
+            border: 1px solid var(--primary-orange); border-radius: 20px; font-size: 0.8em; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;
         }
-        .shop-card:hover .category-badge {
-             background-color: var(--primary-orange);
-             color: #000;
-        }
+        .shop-card:hover .category-badge { background-color: var(--primary-orange); color: #000; }
 
-        /* Fenêtre Modal (Pop-up de Détails) */
+        /* Modal */
         .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.85);
-            backdrop-filter: blur(5px);
+            display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.85); backdrop-filter: blur(5px);
         }
         .modal-content {
-            background-color: var(--card-bg);
-            color: var(--text-main);
-            margin: 8% auto;
-            padding: 40px;
-            border: 2px solid var(--primary-orange);
-            border-radius: 20px;
-            width: 85%;
-            max-width: 650px;
-            position: relative;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.7);
-            text-align: center;
+            background-color: var(--card-bg); color: var(--text-main); margin: 8% auto; padding: 40px; border: 2px solid var(--primary-orange);
+            border-radius: 20px; width: 85%; max-width: 650px; position: relative; box-shadow: 0 15px 40px rgba(0,0,0,0.7); text-align: center;
         }
-        .close-modal {
-            color: var(--primary-orange);
-            position: absolute;
-            top: 15px;
-            right: 25px;
-            font-size: 35px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: transform 0.2s ease;
-        }
-        .close-modal:hover {
-            transform: scale(1.2);
-            color: #fff;
-        }
+        .close-modal { color: var(--primary-orange); position: absolute; top: 15px; right: 25px; font-size: 35px; font-weight: bold; cursor: pointer; transition: transform 0.2s ease; }
+        .close-modal:hover { transform: scale(1.2); color: #fff; }
 
-        /* Mise en page interne du Modal */
-        #modal-header {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-        #modal-body h2 {
-            color: var(--primary-orange);
-            margin-bottom: 5px;
-            font-size: 2.2em;
-        }
+        #modal-header { display: flex; flex-direction: column; align-items: center; margin-bottom: 30px; }
+        #modal-body h2 { color: var(--primary-orange); margin-bottom: 5px; font-size: 2.2em; }
+        
         .modal-shop-details {
-            text-align: left;
-            max-width: 90%;
-            margin: 0 auto;
-            background-color: #1a1a1a;
-            padding: 25px;
-            border-radius: 12px;
-            border: 1px solid #333;
+            text-align: left; max-width: 90%; margin: 0 auto; background-color: #1a1a1a; padding: 25px; border-radius: 12px; border: 1px solid #333;
         }
-        .modal-detail-line {
-            font-size: 1.1em;
-            margin-bottom: 12px;
-            display: flex;
-            justify-content: space-between;
-            border-bottom: 1px solid #2a2a2a;
-            padding-bottom: 8px;
-        }
-        .modal-detail-line strong {
-            color: #fff;
-        }
-        .modal-detail-line span {
-            color: var(--text-muted);
-        }
-
+        .modal-detail-line { font-size: 1.1em; margin-bottom: 12px; display: flex; justify-content: space-between; border-bottom: 1px solid #2a2a2a; padding-bottom: 8px; }
+        .modal-detail-line strong { color: #fff; }
+        .modal-detail-line span { color: var(--text-muted); }
     </style>
 </head>
 <body>
@@ -257,43 +123,42 @@
     <div id="shopModal" class="modal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeModal()">&times;</span>
-            <div id="modal-body">
-                </div>
+            <div id="modal-body"></div>
         </div>
     </div>
 
     <script>
-        // La base de données contient maintenant le "domain" (site web) pour tirer le logo automatiquement
+        // Base de données simple, sans appels externes
         const shops = [
-            { id: 1, name: "ZARA", domain: "zara.com", category: "MODE", delay: "3 jours", account: "Non requis", return: "Possible" },
-            { id: 2, name: "Apple", domain: "apple.com", category: "TECH", delay: "Immédiat", account: "Requis (historique d'achat)", return: "Possible" },
-            { id: 3, name: "Sephora", domain: "sephora.fr", category: "BEAUTE", delay: "2 jours", account: "Non requis", return: "Possible" },
-            { id: 4, name: "Rolex", domain: "rolex.com", category: "LUXE", delay: "Sur commande", account: "Oui (profil VIP)", return: "Non possible" },
-            { id: 5, name: "Decathlon", domain: "decathlon.fr", category: "SPORT", delay: "1 jour", account: "Non requis", return: "Possible" },
-            { id: 6, name: "Ikea", domain: "ikea.com", category: "MAISON", delay: "4 jours", account: "Non requis", return: "Possible" },
-            { id: 7, name: "Boulanger", domain: "boulanger.com", category: "TECH", delay: "2 jours", account: "Non requis", return: "Possible" },
-            { id: 8, name: "Norauto", domain: "norauto.fr", category: "AUTO", delay: "3 jours", account: "Non requis", return: "Possible" },
-            { id: 9, name: "Fnac", domain: "fnac.com", category: "DIVERS", delay: "Immédiat", account: "Non requis", return: "Possible" },
-            { id: 10, name: "Louis Vuitton", domain: "louisvuitton.com", category: "LUXE", delay: "Sur commande", account: "Oui (historique requis)", return: "Non possible" },
-            { id: 11, name: "Nike", domain: "nike.com", category: "SPORT", delay: "2 jours", account: "Oui (compte membre)", return: "Possible" }
+            { id: 1, name: "ZARA", category: "MODE", delay: "3 jours", account: "Non requis", return: "Possible" },
+            { id: 2, name: "Apple", category: "TECH", delay: "Immédiat", account: "Requis (historique d'achat)", return: "Possible" },
+            { id: 3, name: "Sephora", category: "BEAUTE", delay: "2 jours", account: "Non requis", return: "Possible" },
+            { id: 4, name: "Rolex", category: "LUXE", delay: "Sur commande", account: "Oui (profil VIP)", return: "Non possible" },
+            { id: 5, name: "Decathlon", category: "SPORT", delay: "1 jour", account: "Non requis", return: "Possible" },
+            { id: 6, name: "Ikea", category: "MAISON", delay: "4 jours", account: "Non requis", return: "Possible" },
+            { id: 7, name: "Boulanger", category: "TECH", delay: "2 jours", account: "Non requis", return: "Possible" },
+            { id: 8, name: "Norauto", category: "AUTO", delay: "3 jours", account: "Non requis", return: "Possible" },
+            { id: 9, name: "Fnac", category: "DIVERS", delay: "Immédiat", account: "Non requis", return: "Possible" },
+            { id: 10, name: "Louis Vuitton", category: "LUXE", delay: "Sur commande", account: "Oui (historique requis)", return: "Non possible" },
+            { id: 11, name: "Nike", category: "SPORT", delay: "2 jours", account: "Oui (compte membre)", return: "Possible" }
         ];
 
-        // Fonction pour afficher les boutiques
         function renderShops(shopList) {
             const container = document.getElementById('shop-container');
             container.innerHTML = ''; 
-
             shopList.sort((a, b) => a.name.localeCompare(b.name));
 
             shopList.forEach(shop => {
                 const card = document.createElement('div');
                 card.className = 'shop-card';
                 card.onclick = () => openModal(shop.id);
+                
+                // On récupère juste la première lettre de la boutique
+                const initial = shop.name.charAt(0).toUpperCase();
 
-                // On utilise Clearbit Logo API pour tirer l'image automatiquement grâce au nom de domaine
                 card.innerHTML = `
                     <div class="shop-logo-container">
-                         <img src="https://logo.clearbit.com/${shop.domain}" alt="Logo ${shop.name}" class="shop-logo-image" onerror="this.src='https://via.placeholder.com/120?text=${shop.name}'">
+                         <span class="logo-initial">${initial}</span>
                     </div>
                     <h3>${shop.name}</h3>
                     <span class="category-badge">${shop.category}</span>
@@ -302,10 +167,9 @@
             });
         }
 
-        // Fonction pour filtrer
         function filterShops(category) {
             document.querySelectorAll('.filters button').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            if(event) event.target.classList.add('active');
 
             if (category === 'TOUT') {
                 renderShops(shops);
@@ -315,22 +179,21 @@
             }
         }
 
-        // Fonctions pour gérer le Pop-up
         const modal = document.getElementById("shopModal");
 
         function openModal(shopId) {
             const shop = shops.find(s => s.id === shopId);
             const modalBody = document.getElementById("modal-body");
+            const initial = shop.name.charAt(0).toUpperCase();
 
             modalBody.innerHTML = `
                 <div id="modal-header">
-                     <div class="shop-logo-container" style="width: 100px; height: 100px; padding: 5px;">
-                         <img src="https://logo.clearbit.com/${shop.domain}" alt="Logo ${shop.name}" class="shop-logo-image" onerror="this.src='https://via.placeholder.com/100?text=${shop.name}'">
+                     <div class="shop-logo-container">
+                         <span class="logo-initial">${initial}</span>
                     </div>
                     <h2>${shop.name}</h2>
                     <span class="category-badge" style="margin-top: 5px;">${shop.category}</span>
                 </div>
-                
                 <div class="modal-shop-details">
                     <div class="modal-detail-line"><strong>Délai :</strong> <span>${shop.delay}</span></div>
                     <div class="modal-detail-line"><strong>Compte :</strong> <span>${shop.account}</span></div>
@@ -343,7 +206,6 @@
         function closeModal() { modal.style.display = "none"; }
         window.onclick = function(event) { if (event.target == modal) { modal.style.display = "none"; } }
 
-        // Affichage initial
         renderShops(shops);
     </script>
 </body>
