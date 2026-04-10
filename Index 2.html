@@ -299,6 +299,21 @@ ul,ol{list-style:none}
 .mq-item .mq-dot{width:4px;height:4px;background:var(--gray-lt);border-radius:50%}
 
 /* ═══════════════════════════════════════════════════════════════════════════════════
+   VOUCHS
+   ═══════════════════════════════════════════════════════════════════════════════════ */
+#vouchs{padding:80px 0;background:var(--white)}
+.vouchs-sub{font-size:15px;color:var(--gray);margin-top:8px;margin-bottom:40px;text-align:center}
+.vouchs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+.vouch-card{position:relative;border-radius:var(--r-md);overflow:hidden;background:var(--white-3);border:1px solid var(--gray-xlt);aspect-ratio:9/16;cursor:pointer;transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
+.vouch-card:hover{transform:translateY(-4px);box-shadow:0 20px 50px rgba(0,0,0,0.10)}
+.vouch-card img{width:100%;height:100%;object-fit:cover;display:block;user-select:none;-webkit-user-drag:none;pointer-events:none}
+.vouch-watermark{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;pointer-events:none;background:linear-gradient(135deg,rgba(10,132,255,0.04) 0%,rgba(10,132,255,0.04) 100%)}
+.vouch-watermark::before{content:'Franklin Refund';font-family:'Outfit',sans-serif;font-size:13px;font-weight:800;color:rgba(10,132,255,0.35);letter-spacing:2px;text-transform:uppercase;transform:rotate(-30deg);white-space:nowrap;text-shadow:none}
+.vouch-watermark::after{content:'Franklin Refund';font-family:'Outfit',sans-serif;font-size:13px;font-weight:800;color:rgba(10,132,255,0.35);letter-spacing:2px;text-transform:uppercase;transform:rotate(-30deg);white-space:nowrap;margin-top:60px}
+.vouch-empty{grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--gray);font-size:15px}
+@media(max-width:600px){.vouchs-grid{grid-template-columns:repeat(2,1fr);gap:10px}}
+
+/* ═══════════════════════════════════════════════════════════════════════════════════
    STEPPER
    ═══════════════════════════════════════════════════════════════════════════════════ */
 #method{padding:180px 0;background:var(--white)}
@@ -662,6 +677,18 @@ ul,ol{list-style:none}
   </div></section>
 
   <section id="marquee"><div class="mq-track" id="mqTrack"></div></section>
+
+  <section id="vouchs">
+    <div class="container">
+      <div class="s-eyebrow"><span class="ey-bar"></span> Preuves</div>
+      <h2 class="s-heading">VOUCHS</h2>
+      <p class="vouchs-sub">Remboursements réels effectués par notre équipe</p>
+      <div class="vouchs-grid" id="vouchsGrid">
+        <!-- Les screens seront ajoutés ici -->
+        <div class="vouch-empty">Les preuves arrivent bientôt...</div>
+      </div>
+    </div>
+  </section>
 
   <section id="method"><div class="container" style="text-align:center">
     <div class="s-eyebrow"><span class="ey-bar"></span> Processus</div>
