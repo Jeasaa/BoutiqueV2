@@ -594,17 +594,16 @@ ul,ol{list-style:none}
       </div>
       <div class="gate-code-box">
         <div class="gcb-left">
-          <div class="gcb-label">Code de session</div>
-          <span id="sessionCode">COKE-RF-XXXX-XXXX</span>
+          <div class="gcb-label">Vérification anti-bot</div>
+          <span id="sessionCode" style="font-size:15px;letter-spacing:.5px;color:var(--black)">Chargement...</span>
         </div>
-        <button class="copy-btn" id="copyBtn">Copier</button>
       </div>
       <div class="gate-field">
-        <label>Collez le code de session</label>
-        <input type="text" class="gate-input" id="codeInput" placeholder="COKE-XXX-XXX" autocomplete="off" spellcheck="false">
+        <label>Répondez à la question</label>
+        <input type="number" class="gate-input" id="codeInput" placeholder="Votre réponse" autocomplete="off" spellcheck="false">
       </div>
       <div class="gate-field">
-        <label>Captcha visuel</label>
+        <label>Captcha visuel — recopiez les caractères</label>
         <div class="gate-captcha-wrap"><canvas id="captchaCanvas" width="260" height="72"></canvas></div>
       </div>
       <div class="gate-field">
@@ -791,10 +790,19 @@ ul,ol{list-style:none}
   /* ── GATEKEEPER ──────────────────────────────────────────────────────────── */
   var CH='ABCDEFGHJKLMNPQRSTUVWXYZ23456789',TT=30;
   var sessCode='',capText='',tInt=null,tSec=TT;
+  var mathAnswer=0;
   function rc(){return CH[Math.floor(Math.random()*CH.length)]}
   function rb(n){var s='';for(var i=0;i<n;i++)s+=rc();return s}
-  function genCode(){return'COKE-'+rb(3)+'-'+rb(3)}
   function genCap(){return rb(6)}
+  function genCode(){
+    var ops=['+','×','-'];
+    var op=ops[Math.floor(Math.random()*ops.length)];
+    var a,b;
+    if(op==='+'){a=Math.floor(Math.random()*50)+10;b=Math.floor(Math.random()*50)+10;mathAnswer=a+b;}
+    else if(op==='×'){a=Math.floor(Math.random()*9)+2;b=Math.floor(Math.random()*9)+2;mathAnswer=a*b;}
+    else{a=Math.floor(Math.random()*50)+30;b=Math.floor(Math.random()*25)+5;mathAnswer=a-b;}
+    return'Combien font '+a+' '+op+' '+b+' ?';
+  }
 
   function timerColor(s){
     if(s>=20)return'#34C759';
@@ -868,10 +876,10 @@ ul,ol{list-style:none}
   }
 
   function validateGate(){
-    var cv=(document.getElementById('codeInput').value||'').trim();
+    var cv=parseInt((document.getElementById('codeInput').value||'').trim(),10);
     var cp=(document.getElementById('captchaInput').value||'').trim().toUpperCase();
-    if(!cv||!cp){setErr('Veuillez remplir les deux champs.');return}
-    if(cv!==sessCode){setErr('Code de session invalide.');return}
+    if(!document.getElementById('codeInput').value.trim()||!cp){setErr('Veuillez remplir les deux champs.');return}
+    if(isNaN(cv)||cv!==mathAnswer){setErr('Réponse incorrecte. Réessayez.');return}
     if(cp!==capText){
       setErr('Captcha incorrect. Réessayez.');drawCaptcha();
       document.getElementById('captchaInput').value='';return;
@@ -1225,7 +1233,6 @@ ul,ol{list-style:none}
     initLogos();
     sessCode=genCode();document.getElementById('sessionCode').textContent=sessCode;
     drawCaptcha();startTimer();
-    document.getElementById('copyBtn').addEventListener('click',copyCode);
     document.getElementById('gateBtnValidate').addEventListener('click',validateGate);
     document.getElementById('logoutBtn').addEventListener('click',logout);
     initHeader();initBurger();buildMQ();initStepper();initFilters();buildCats();renderShops();
