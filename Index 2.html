@@ -630,7 +630,7 @@ ul,ol{list-style:none}
       </div>
       <div class="gate-field">
         <label>Recopiez les 6 caractères</label>
-        <input type="text" class="gate-input" id="captchaInput" placeholder="XXXXXX" maxlength="6" autocomplete="off" spellcheck="false">
+        <input type="text" class="gate-input" id="captchaInput" placeholder="XXXX" maxlength="4" autocomplete="off" spellcheck="false">
       </div>
       <button class="gate-btn-validate" id="gateBtnValidate">Valider l'accès</button>
       <div class="gate-error" id="gateError"></div>
@@ -858,15 +858,12 @@ ul,ol{list-style:none}
   var mathAnswer=0;
   function rc(){return CH[Math.floor(Math.random()*CH.length)]}
   function rb(n){var s='';for(var i=0;i<n;i++)s+=rc();return s}
-  function genCap(){return rb(6)}
+  function genCap(){return rb(4)}
   function genCode(){
-    var ops=['+','×','-'];
-    var op=ops[Math.floor(Math.random()*ops.length)];
-    var a,b;
-    if(op==='+'){a=Math.floor(Math.random()*50)+10;b=Math.floor(Math.random()*50)+10;mathAnswer=a+b;}
-    else if(op==='×'){a=Math.floor(Math.random()*9)+2;b=Math.floor(Math.random()*9)+2;mathAnswer=a*b;}
-    else{a=Math.floor(Math.random()*50)+30;b=Math.floor(Math.random()*25)+5;mathAnswer=a-b;}
-    return'Combien font '+a+' '+op+' '+b+' ?';
+    var a=Math.floor(Math.random()*9)+1;
+    var b=Math.floor(Math.random()*9)+1;
+    mathAnswer=a+b;
+    return'Combien font '+a+' + '+b+' ?';
   }
 
   function timerColor(s){
@@ -878,25 +875,20 @@ ul,ol{list-style:none}
   function drawCaptcha(){
     var cv=document.getElementById('captchaCanvas');if(!cv)return;
     var ctx=cv.getContext('2d'),W=cv.width,H=cv.height;
-    ctx.clearRect(0,0,W,H);ctx.fillStyle='#EAEAEF';ctx.fillRect(0,0,W,H);
-    for(var i=0;i<8;i++){
-      ctx.strokeStyle='rgba('+(100+Math.random()*80|0)+','+(100+Math.random()*80|0)+','+(160+Math.random()*60|0)+','+(0.2+Math.random()*.15)+')';
-      ctx.lineWidth=.8+Math.random();ctx.beginPath();
+    ctx.clearRect(0,0,W,H);ctx.fillStyle='#F5F5F7';ctx.fillRect(0,0,W,H);
+    for(var i=0;i<3;i++){
+      ctx.strokeStyle='rgba(150,150,180,0.25)';
+      ctx.lineWidth=1;ctx.beginPath();
       ctx.moveTo(Math.random()*W,Math.random()*H);
-      ctx.bezierCurveTo(Math.random()*W,Math.random()*H,Math.random()*W,Math.random()*H,Math.random()*W,Math.random()*H);
+      ctx.lineTo(Math.random()*W,Math.random()*H);
       ctx.stroke();
-    }
-    for(var j=0;j<50;j++){
-      ctx.fillStyle='rgba(0,0,0,'+(Math.random()*.08)+')';ctx.beginPath();
-      ctx.arc(Math.random()*W,Math.random()*H,Math.random()*2,0,Math.PI*2);ctx.fill();
     }
     capText=genCap();var sp=W/(capText.length+1);
     capText.split('').forEach(function(ch,i){
-      ctx.save();var x=sp*(i+1),y=H/2+(Math.random()*14-7);
-      ctx.translate(x,y);ctx.rotate((Math.random()-.5)*.65);
-      var sc=.8+Math.random()*.4;ctx.scale(sc,sc);
-      ctx.font='800 '+(20+Math.random()*10)+"px 'Outfit',sans-serif";
-      ctx.fillStyle='rgba('+(20+Math.random()*40|0)+','+(20+Math.random()*40|0)+','+(40+Math.random()*60|0)+','+(0.7+Math.random()*.3)+')';
+      ctx.save();var x=sp*(i+1),y=H/2+(Math.random()*8-4);
+      ctx.translate(x,y);ctx.rotate((Math.random()-.5)*.3);
+      ctx.font='700 26px \'Outfit\',sans-serif';
+      ctx.fillStyle='#1D1D1F';
       ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(ch,0,0);ctx.restore();
     });
   }
