@@ -1174,16 +1174,12 @@ ul,ol{list-style:none}
   function renderShops(){
     var g=document.getElementById('shopGrid');if(!g)return;
     var q=(document.getElementById('shopSearch').value||'').toLowerCase().trim();
-    /* Build cards: real shops + blank placeholders */
     var allCards=[];
     REAL_SHOPS.forEach(function(s){
       if(aCat&&s.cats.indexOf(aCat)===-1)return;
       if(q&&s.n.toLowerCase().indexOf(q)===-1&&s.cats.join(' ').toLowerCase().indexOf(q)===-1)return;
       allCards.push(s);
     });
-    var blanks=mkBlank(aCat||'');
-    if(q)blanks=blanks.filter(function(c){return c.n.toLowerCase().indexOf(q)!==-1||c.cats.join(' ').toLowerCase().indexOf(q)!==-1});
-    allCards=allCards.concat(blanks);
     if(!allCards.length){g.innerHTML='<div class="shop-empty">Aucune boutique trouvée.</div>';return}
     var boxIc='<svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:var(--gray);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 002 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>';
     g.innerHTML=allCards.map(function(c){
