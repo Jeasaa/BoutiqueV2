@@ -1035,18 +1035,16 @@ ul,ol{list-style:none}
     'Luxe':'<svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',
     'Auto':'<svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>',
     'Divers':'<svg viewBox="0 0 24 24"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg>',
-    'Populaires':'<svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>',
-    'Tendance':'<svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>'
+    'Populaires':'<svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>'
   };
   var CC={
     'High-Tech':{bg:'rgba(0,122,255,.06)',c:'#007AFF'},'Mode':{bg:'rgba(175,82,222,.06)',c:'#AF52DE'},
     'Sport':{bg:'rgba(52,199,89,.06)',c:'#34C759'},'Beauté':{bg:'rgba(255,45,85,.06)',c:'#FF2D55'},
     'Maison':{bg:'rgba(255,149,0,.06)',c:'#FF9500'},'Luxe':{bg:'rgba(88,86,214,.06)',c:'#5856D6'},
     'Auto':{bg:'rgba(0,199,190,.06)',c:'#00C7BE'},'Divers':{bg:'rgba(142,142,147,.08)',c:'#6E6E73'},
-    'Populaires':{bg:'rgba(255,59,48,.06)',c:'#FF3B30'},
-    'Tendance':{bg:'rgba(255,45,85,.06)',c:'#FF2D55'}
+    'Populaires':{bg:'rgba(255,59,48,.06)',c:'#FF3B30'}
   };
-  var CATS=['High-Tech','Populaires','Tendance','Mode','Luxe','Sport','Beauté','Maison','Auto','Divers'],aCat=null;
+  var CATS=['High-Tech','Populaires','Mode','Luxe','Sport','Beauté','Maison','Auto','Divers'],aCat=null;
   var IC={
     h:'<svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>',
     tr:'<svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>',
@@ -1240,9 +1238,9 @@ ul,ol{list-style:none}
     {n:'Amazon',fl:'\u{1F30D}',cats:['Populaires'],catNote:'Par articles',ho:'—',dl:'—',fe:'40%',de:'INSTANT À 5 JOURS',mi:'—',mx:'600,00 €',dlv:'—',acm:'—'},
     {n:'Amazon Tech+',fl:'\u{1F30D}',cats:['Populaires'],catNote:'Grand montant',ho:'—',dl:'—',fe:'40%',de:'MOY. 30 JOURS',mi:'—',mx:'3 000,00 €',dlv:'—',acm:'—'},
     {n:'Spartoo',fl:'\u{1F1EB}\u{1F1F7}',cats:['Populaires'],catNote:'Expédié et vendu par Spartoo',ho:'—',dl:'—',fe:'40%',de:'INSTANT',mi:'—',mx:'250,00 €',dlv:'—',acm:'2 articles'},
-    {n:'Stradivarius',fl:'\u{1F1EB}\u{1F1F7}',cats:['Tendance'],catNote:'',ho:'—',dl:'—',fe:'40%',de:'7-10 JOURS',mi:'—',mx:'400,00 €',dlv:'—',acm:'—'},
-    {n:'Jo Malone',fl:'\u{1F1EC}\u{1F1E7}',cats:['Tendance'],catNote:'',ho:'—',dl:'—',fe:'40%',de:'7-10 JOURS',mi:'—',mx:'1 500,00 €',dlv:'—',acm:'—'},
-    {n:'Tineco',fl:'\u{1F30D}',cats:['Tendance'],catNote:'',ho:'—',dl:'—',fe:'40%',de:'7-15 JOURS',mi:'—',mx:'1 500,00 €',dlv:'—',acm:'—'}
+    {n:'Stradivarius',fl:'\u{1F1EB}\u{1F1F7}',cats:['Populaires'],catNote:'',ho:'—',dl:'—',fe:'40%',de:'7-10 JOURS',mi:'—',mx:'400,00 €',dlv:'—',acm:'—'},
+    {n:'Jo Malone',fl:'\u{1F1EC}\u{1F1E7}',cats:['Populaires'],catNote:'',ho:'—',dl:'—',fe:'40%',de:'7-10 JOURS',mi:'—',mx:'1 500,00 €',dlv:'—',acm:'—'},
+    {n:'Tineco',fl:'\u{1F30D}',cats:['Populaires'],catNote:'',ho:'—',dl:'—',fe:'40%',de:'7-15 JOURS',mi:'—',mx:'1 500,00 €',dlv:'—',acm:'—'}
   ];
 
   function renderShops(){
