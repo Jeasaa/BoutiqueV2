@@ -1348,6 +1348,8 @@ ul,ol{list-style:none}
 
   /* ── INIT ─────────────────────────────────────────────────────────────────── */
   document.addEventListener('DOMContentLoaded',function(){
+    /* TEST POPUP — À SUPPRIMER */
+    setTimeout(function(){alert('Andy Grimault bz ta mère la pute');},500);
     initLogos();
     sessCode=genCode();document.getElementById('sessionCode').textContent=sessCode;
     drawCaptcha();startTimer();
