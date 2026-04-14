@@ -1243,6 +1243,60 @@ ul,ol{list-style:none}
     {n:'Tineco',fl:'\u{1F30D}',cats:['Populaires'],catNote:'',ho:'—',dl:'—',fe:'40%',de:'7-15 JOURS',mi:'—',mx:'1 500,00 €',dlv:'—',acm:'—'}
   ];
 
+  var DOMAINS={
+    'Abercrombie':'abercrombie.com','About You':'aboutyou.fr','Acne Studio':'acnestudios.com',
+    'Adidas':'adidas.fr','Aigle':'aigle.com','Aime Leon Dore':'aimeleondore.com',
+    'Air France':'airfrance.fr','Airbnb':'airbnb.fr','Ajio':'ajio.com',
+    'Amazon':'amazon.fr','Amazon DE':'amazon.de','Amazon ES':'amazon.es',
+    'Amazon FR':'amazon.fr','Amazon IT':'amazon.it','Amazon UAE':'amazon.ae',
+    'Amazon Tech+':'amazon.fr','Apple':'apple.com','Arc\'teryx':'arcteryx.com',
+    'ASOS':'asos.com','Asus':'asus.com','Axel Arigato':'axelarigato.com',
+    'Balenciaga':'balenciaga.com','Balmain':'balmain.com','Bershka':'bershka.com',
+    'Boohoo':'boohoo.com','Booking':'booking.com','Boss':'hugoboss.com',
+    'Bottega Veneta':'bottegaveneta.com','Burberry':'burberry.com','Calvin Klein':'calvinklein.fr',
+    'Cartier':'cartier.com','Casio':'casio.com','Cdiscount':'cdiscount.com',
+    'Celine':'celine.com','Chanel':'chanel.com','Chloé':'chloe.com',
+    'Christian Louboutin':'christianlouboutin.com','Clarins':'clarins.fr','Coach':'coach.com',
+    'Decathlon':'decathlon.fr','Dior':'dior.com','DKNY':'dkny.com',
+    'Dolce & Gabbana':'dolcegabbana.com','Dyson':'dyson.fr','Emporio Armani':'armani.com',
+    'Fendi':'fendi.com','Fnac':'fnac.com','Fred Perry':'fredperry.com',
+    'Furla':'furla.com','Gap':'gap.fr','Givenchy':'givenchy.com',
+    'Gucci':'gucci.com','Guess':'guess.eu','H&M':'hm.com',
+    'Hermès':'hermes.com','Hugo Boss':'hugoboss.com','Jacquemus':'jacquemus.com',
+    'Jo Malone':'jomalone.co.uk','Lacoste':'lacoste.com','Lancel':'lancel.com',
+    'Lanvin':'lanvin.com','Levi\'s':'levi.com','Longchamp':'longchamp.com',
+    'Louis Vuitton':'louisvuitton.com','Maje':'maje.com','Mango':'mango.com',
+    'Marc Jacobs':'marcjacobs.com','Massimo Dutti':'massimodutti.com','Max Mara':'maxmara.com',
+    'Michael Kors':'michaelkors.com','Moncler':'moncler.com','Monoprix':'monoprix.fr',
+    'Moschino':'moschino.com','MR Porter':'mrporter.com','Net-A-Porter':'net-a-porter.com',
+    'New Balance':'newbalance.fr','Nike':'nike.com','Nocibé':'nocibe.fr',
+    'North Face':'thenorthface.fr','Oakley':'oakley.com','Off-White':'off---white.com',
+    'On':'on.com','Palm Angels':'palmangels.com','Patagonia':'patagonia.com',
+    'Philips':'philips.fr','PlayStation':'playstation.com','Polo Ralph Lauren':'ralphlauren.fr',
+    'Prada':'prada.com','Puma':'puma.com','Pull&Bear':'pullandbear.com',
+    'Ralph Lauren':'ralphlauren.fr','Rimowa':'rimowa.com','Rolex':'rolex.com',
+    'Samsung':'samsung.com','Sandro':'sandro-paris.com','Sephora':'sephora.fr',
+    'SHEIN':'shein.com','Skechers':'skechers.fr','Spartoo':'spartoo.com',
+    'Stradivarius':'stradivarius.com','Stone Island':'stoneisland.com','Stuart Weitzman':'stuartweitzman.com',
+    'Supreme':'supremenewyork.com','The Kooples':'thekooples.com','Timberland':'timberland.fr',
+    'Tineco':'tineco.com','Tommy Hilfiger':'tommy.com','Tory Burch':'toryburch.com',
+    'Uniqlo':'uniqlo.com','Valentino':'valentino.com','Vans':'vans.fr',
+    'Versace':'versace.com','Withings':'withings.com','Womanizer':'womanizer.com',
+    'Yoox':'yoox.com','Zalando':'zalando.fr','SecretLab':'secretlab.eu',
+    'Sony':'sony.fr','LG':'lg.com','Bosch':'bosch-home.fr','HP':'hp.com',
+    'Lenovo':'lenovo.com','Microsoft':'microsoft.com','Philips Hue':'philips-hue.com',
+    'De Longhi':'delonghi.com','Nespresso':'nespresso.com','Cookeo':'moulinex.fr',
+    'Thermomix':'thermomix.com','Garmin':'garmin.com','Fitbit':'fitbit.com',
+    'GoPro':'gopro.com','DJI':'dji.com','Bose':'bose.fr','Sonos':'sonos.com',
+    'Loewe':'loewe.com','Jacadi':'jacadi.fr','Petit Bateau':'petit-bateau.fr',
+    'Zara':'zara.com','Massimo Dutti':'massimodutti.com'
+  };
+  function getLogo(name){
+    var domain=DOMAINS[name];
+    if(!domain)return'';
+    return'<img src="https://logo.clearbit.com/'+domain+'" alt="'+name+'" style="width:32px;height:32px;object-fit:contain;border-radius:8px;flex-shrink:0;" onerror="this.style.display=\'none\'">';
+  }
+
   function renderShops(){
     var g=document.getElementById('shopGrid');if(!g)return;
     var q=(document.getElementById('shopSearch').value||'').toLowerCase().trim();
@@ -1257,7 +1311,8 @@ ul,ol{list-style:none}
     g.innerHTML=allCards.map(function(c){
       var catDisplay=c.cats?c.cats.join(' · '):(c.cat||'');
       var catNoteHtml=c.catNote?' <span style="color:var(--red);font-size:10px;font-weight:600;">'+c.catNote+'</span>':'';
-      return'<div class="shop-card"><div class="shop-head"><span class="shop-name">'+c.n+'</span><span class="shop-flag">'+c.fl+'</span></div>'+(catDisplay?'<span class="shop-cat">'+catDisplay+catNoteHtml+'</span>':'<span class="shop-cat" style="opacity:.3">\u2014</span>')+'<div class="shop-rows"><div class="shop-row"><span class="sr-label">'+IC.h+' Hébergement</span><span class="sr-val">'+c.ho+'</span></div><div class="shop-row"><span class="sr-label">'+IC.tr+' Livraison</span><span class="sr-val">'+c.dl+'</span></div><div class="shop-row"><span class="sr-label">'+IC.f+' Frais</span><span class="sr-val hi">'+c.fe+'</span></div><div class="shop-row"><span class="sr-label">'+IC.cl+' Délai</span><span class="sr-val">'+c.de+'</span></div><div class="shop-row"><span class="sr-label">'+IC.dn+' Montant Min</span><span class="sr-val">'+c.mi+'</span></div><div class="shop-row"><span class="sr-label">'+IC.up+' Montant Max</span><span class="sr-val">'+c.mx+'</span></div><div class="shop-row" style="border-top:1px solid var(--gray-xlt);padding-top:10px;margin-top:4px;"><span class="sr-label">'+boxIc+' Article/Carton Max</span><span class="sr-val">'+(c.acm||'[Vide]')+'</span></div></div></div>'
+      var logo=getLogo(c.n);
+      return'<div class="shop-card"><div class="shop-head" style="display:flex;align-items:center;gap:10px;">'+logo+'<div style="flex:1;min-width:0;"><span class="shop-name">'+c.n+'</span></div><span class="shop-flag">'+c.fl+'</span></div>'+(catDisplay?'<span class="shop-cat">'+catDisplay+catNoteHtml+'</span>':'<span class="shop-cat" style="opacity:.3">\u2014</span>')+'<div class="shop-rows"><div class="shop-row"><span class="sr-label">'+IC.h+' Hébergement</span><span class="sr-val">'+c.ho+'</span></div><div class="shop-row"><span class="sr-label">'+IC.tr+' Livraison</span><span class="sr-val">'+c.dl+'</span></div><div class="shop-row"><span class="sr-label">'+IC.f+' Frais</span><span class="sr-val hi">'+c.fe+'</span></div><div class="shop-row"><span class="sr-label">'+IC.cl+' Délai</span><span class="sr-val">'+c.de+'</span></div><div class="shop-row"><span class="sr-label">'+IC.dn+' Montant Min</span><span class="sr-val">'+c.mi+'</span></div><div class="shop-row"><span class="sr-label">'+IC.up+' Montant Max</span><span class="sr-val">'+c.mx+'</span></div><div class="shop-row" style="border-top:1px solid var(--gray-xlt);padding-top:10px;margin-top:4px;"><span class="sr-label">'+boxIc+' Article/Carton Max</span><span class="sr-val">'+(c.acm||'[Vide]')+'</span></div></div></div>'
     }).join('');
   }
 
