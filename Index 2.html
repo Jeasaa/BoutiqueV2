@@ -1293,8 +1293,11 @@ ul,ol{list-style:none}
   };
   function getLogo(name){
     var domain=DOMAINS[name];
-    if(!domain)return'';
-    return'<img src="https://www.google.com/s2/favicons?sz=64&domain_url=https://'+domain+'" alt="'+name+'" style="width:28px;height:28px;object-fit:contain;border-radius:6px;flex-shrink:0;" onerror="this.style.display=\'none\'">';
+    if(!domain){
+      domain=name.toLowerCase().replace(/[^a-z0-9]/g,'').replace(/\s+/g,'')+'.com';
+    }
+    var url='https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://'+domain+'&size=64';
+    return'<img src="'+url+'" alt="'+name+'" style="width:28px;height:28px;object-fit:contain;border-radius:6px;flex-shrink:0;background:#f5f5f7;padding:2px;" onerror="this.style.display=\'none\'">';
   }
 
   function renderShops(){
